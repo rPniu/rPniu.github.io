@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/rPniu.github.io/img/fluid.png">
-  <link rel="icon" href="/rPniu.github.io/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="参考链接先抬参考链接吧，博客只是自我理解，可能有错误 浅谈C&#x2F;C++堆栈指引——C&#x2F;C++堆栈很强大（绝美） - findumars - 博客园 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3755401.htmlhttps:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3756668.html 第一篇比较通俗，后两篇看到有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言调用栈">
-<meta property="og:url" content="https://rpniu.github.io/rPniu.github.io/2024/10/21/C%E8%AF%AD%E8%A8%80%E8%B0%83%E7%94%A8%E6%A0%88/index.html">
+<meta property="og:url" content="https://rpniu.github.io/2024/10/21/C%E8%AF%AD%E8%A8%80%E8%B0%83%E7%94%A8%E6%A0%88/index.html">
 <meta property="og:site_name" content="tree">
 <meta property="og:description" content="参考链接先抬参考链接吧，博客只是自我理解，可能有错误 浅谈C&#x2F;C++堆栈指引——C&#x2F;C++堆栈很强大（绝美） - findumars - 博客园 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3755401.htmlhttps:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3756668.html 第一篇比较通俗，后两篇看到有">
 <meta property="og:locale" content="zh_CN">
@@ -63,12 +63,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/rPniu.github.io/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/rPniu.github.io/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/rPniu.github.io/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -77,15 +77,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"rpniu.github.io","root":"/rPniu.github.io/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/rPniu.github.io/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"rpniu.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/rPniu.github.io/js/utils.js" ></script>
-  <script  src="/rPniu.github.io/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -102,7 +102,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/rPniu.github.io/">
+    <a class="navbar-brand" href="/">
       <strong>rPniu</strong>
     </a>
 
@@ -121,7 +121,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/rPniu.github.io/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -133,7 +133,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/rPniu.github.io/archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -145,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/rPniu.github.io/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -157,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/rPniu.github.io/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -169,7 +169,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/rPniu.github.io/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -181,7 +181,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/rPniu.github.io/links/" target="_self">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -211,7 +211,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/rPniu.github.io/img/web/mao4.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/web/mao4.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -306,7 +306,7 @@
 
 <h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>寄存器是计算机处理器（CPU）内部的一种非常快速的存储设备，它们位于 CPU 内核内部。分为通用寄存器，专用寄存器等。</p>
 <p>寄存器的图示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/rPniu/img@main/img/202406121909270.png" srcset="/rPniu.github.io/img/loading.gif" lazyload alt="register"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/rPniu/img@main/img/202406121909270.png" srcset="/img/loading.gif" lazyload alt="register"></p>
 <p>在函数的调用中主要讲ebp和esp寄存器，但并不代表只有这两个寄存器在发挥作用，比如，eax会保存函数的返回值</p>
 <h3 id="C语言函数调用栈"><a href="#C语言函数调用栈" class="headerlink" title="C语言函数调用栈"></a>C语言函数调用栈</h3><p>核心内容</p>
 <h4 id="栈帧结构"><a href="#栈帧结构" class="headerlink" title="栈帧结构"></a>栈帧结构</h4><p>函数的调用通常是嵌套的，同一时刻，堆栈中会有多个函数的信息，每个未完成的函数占用一个独立的连续区域，称作栈帧。</p>
@@ -315,7 +315,7 @@
 <p>以下是栈帧的示意图</p>
 <p>caller：主调函数</p>
 <p>callee：被调函数</p>
-<p><img src="https://images0.cnblogs.com/i/569008/201405/271644419475745.jpg" srcset="/rPniu.github.io/img/loading.gif" lazyload></p>
+<p><img src="https://images0.cnblogs.com/i/569008/201405/271644419475745.jpg" srcset="/img/loading.gif" lazyload></p>
 <h4 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h4><p>入栈顺序</p>
 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">被调用函数实参<span class="hljs-built_in">N</span>~<span class="hljs-number">1</span>→主调函数返回地址→主调函数帧基指针EBP→被调函数局部变量<span class="hljs-number">1</span>~<span class="hljs-built_in">N</span><br></code></pre></td></tr></table></figure>
 
@@ -357,7 +357,7 @@
 
 
 
-<p><img src="https://images.cnblogs.com/cnblogs_com/Binhua-Liu/WindowsLiveWriter/0bb58b6786c8_8EAD/image_thumb_9.png" srcset="/rPniu.github.io/img/loading.gif" lazyload></p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/Binhua-Liu/WindowsLiveWriter/0bb58b6786c8_8EAD/image_thumb_9.png" srcset="/img/loading.gif" lazyload></p>
 <p>可以看到随着数据的压栈（入栈）操作，（栈顶指针）RSP是在变化的，减小</p>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>水一篇，感觉没什么过多的感悟和自我操作，懒鬼，不要学我，学习就是要多动手</p>
 
@@ -378,7 +378,7 @@
     
       <span class="category-chain">
         
-  <a href="/rPniu.github.io/categories/binary/" class="category-chain-item">binary</a>
+  <a href="/categories/binary/" class="category-chain-item">binary</a>
   
   
 
@@ -393,9 +393,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/rPniu.github.io/tags/c/" class="print-no-link">#c</a>
+        <a href="/tags/c/" class="print-no-link">#c</a>
       
-        <a href="/rPniu.github.io/tags/pwn/" class="print-no-link">#pwn</a>
+        <a href="/tags/pwn/" class="print-no-link">#pwn</a>
       
     </div>
   
@@ -408,7 +408,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>C语言调用栈</div>
-      <div>https://rpniu.github.io/rPniu.github.io/2024/10/21/C语言调用栈/</div>
+      <div>https://rpniu.github.io/2024/10/21/C语言调用栈/</div>
     </div>
     <div class="license-meta">
       
@@ -452,7 +452,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/rPniu.github.io/2024/11/17/new-start/" title="new-start">
+                      <a href="/2024/11/17/new-start/" title="new-start">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">new-start</span>
                         <span class="visible-mobile">上一篇</span>
@@ -462,7 +462,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/rPniu.github.io/2024/06/16/vscode%E9%85%8D%E7%BD%AEc%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/" title="vscode配置c语言环境">
+                      <a href="/2024/06/16/vscode%E9%85%8D%E7%BD%AEc%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/" title="vscode配置c语言环境">
                         <span class="hidden-mobile">vscode配置c语言环境</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -481,7 +481,7 @@
   <div id="gitalk-container"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#gitalk-container', function() {
-      Fluid.utils.createCssLink('/rPniu.github.io/css/gitalk.css')
+      Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
         var options = Object.assign(
           {"clientID":"Ov23lirn09NkIEi34FA2","clientSecret":"01e7d495ef8743e2725eb1a6bf7478f9abae5edf","repo":"gitalk-comments","owner":"rPniu","admin":"rPniu","language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
@@ -618,8 +618,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/rPniu.github.io/js/events.js" ></script>
-<script  src="/rPniu.github.io/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -641,7 +641,7 @@
 
 
   
-    <script  src="/rPniu.github.io/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -740,7 +740,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/rPniu.github.io/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -748,7 +748,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/rPniu.github.io/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
