@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>hexo-theme-fluid的使用</title>
+    <link href="/2025/03/26/hexo-theme-fluid%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2025/03/26/hexo-theme-fluid%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<p>官方文档：<a href="https://fluid-dev.github.io/hexo-fluid-docs/start/">https://fluid-dev.github.io/hexo-fluid-docs/start/</a></p><h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>这个功能需要配合一些第三方的api，因为是使用的github-page，所以就全套了，使用的是<code>gitalk</code>。</p><p>gitalk是基于issue的，先建立一个存储库，我建的是一个新库，记得public</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">gitalk-comments</span><br></code></pre></td></tr></table></figure><p>访问：<a href="https://github.com/settings/developers">https://github.com/settings/developers</a></p><p>自己在设置寻找比较麻烦，新建</p><p><img src="/image/2.png" alt="img"></p><p>xxxxx是你的github名字</p><p><img src="/image/image-20250326231945393.png" alt="image-20250326231945393"></p><p>点击 <code>Generate a new client secret</code>生成</p><p>复制id，和生成的secret。</p><p>安装主体</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">npm <span class="hljs-selector-tag">i</span> <span class="hljs-attr">--save</span> gitalk<br></code></pre></td></tr></table></figure><p>修改配置文件，输入之前复制的id和secret</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">comments:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">gitalk</span><br>  <br>  <span class="hljs-attr">gitalk:</span> <span class="hljs-comment">#这部分在下面一点，不用直接复制</span><br>    <span class="hljs-attr">clientID:</span> <br>    <span class="hljs-attr">clientSecret:</span> <br>    <span class="hljs-attr">repo:</span> <span class="hljs-string">github_name.github.io</span><br>    <span class="hljs-attr">owner:</span> <span class="hljs-string">github_name</span><br>    <span class="hljs-attr">admin:</span> <span class="hljs-string">github_name</span><br>    <span class="hljs-attr">language:</span> <span class="hljs-string">zh-CN</span><br>    <span class="hljs-attr">labels:</span> [<span class="hljs-string">&#x27;Gitalk&#x27;</span>]<br>    <span class="hljs-attr">perPage:</span> <span class="hljs-number">10</span><br>    <span class="hljs-attr">pagerDirection:</span> <span class="hljs-string">last</span><br>    <span class="hljs-attr">distractionFreeMode:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">createIssueManually:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">hexo g <span class="hljs-meta">&amp;&amp; hexo d</span><br></code></pre></td></tr></table></figure><p>还需要在文章页底部初始化Issue</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>blog</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>hexo-theme-fluid的坑</title>
+    <link href="/2025/03/26/hexo-theme-fluid%E7%9A%84%E5%9D%91/"/>
+    <url>/2025/03/26/hexo-theme-fluid%E7%9A%84%E5%9D%91/</url>
+    
+    <content type="html"><![CDATA[<p>真的是坑哭了，昨天本来先有空整个美美的blog，但是图片加载不出来。</p><p>本地展示<code>hexo s</code> 也是可以的，但只要 <code>hexo d</code>推送，没有任何的报错，仓库里也是有的，但是图片就是404。</p><p>我还找个同样主题的博客看了眼，也是可以的，不是404。</p><p>当时情况是储存图片的位置为<code>/img</code>，这是按照官方文档储存的。我自己有个github图床也是名叫 <code>img</code>，不知道是不是这个原因。</p><p>在自己写的文章的图片也是加载不出来，是这样引用的。</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">!<span class="hljs-selector-attr">[]</span>(/<span class="hljs-selector-tag">img</span>/<span class="hljs-number">1</span><span class="hljs-selector-class">.png</span>)<br></code></pre></td></tr></table></figure><p>后面我直接修改文件夹名为image，文章中的图片活了。不是404了。</p><p>后面我直接吧主题的静态资源文件夹名字改了，当时也是有点崩溃了，弄了一个晚上和一下午。</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">fluid\<span class="hljs-selector-tag">source</span>\<span class="hljs-selector-tag">img</span><br>改为<br>fluid\<span class="hljs-selector-tag">source</span>\<span class="hljs-selector-tag">image</span><br></code></pre></td></tr></table></figure><p>然后在config文件中也这样修改</p><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">img</span><br><span class="hljs-operator">=</span><span class="hljs-operator">=</span>&gt;<br>image<br></code></pre></td></tr></table></figure><p>嫌麻烦的话可以使用全部替换，但是，先审查一下有没有其他地方必须是<code>/img</code>，比如说一个链接，这是1056行左右的代码。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml">custom:<br>  enable: false<br>  content: &#x27;<span class="hljs-tag">&lt;<span class="hljs-name">hr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>在下方留言申请加入我的友链，按如下格式提供信息：<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>博客名：Fluid<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>简介：Fluid 主题官方博客<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>链接：https://hexo.fluid-dev.com<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>图片：https://hexo.fluid-dev.com/img/favicon.png<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>&#x27;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>blog</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>test</title>
     <link href="/2025/03/26/test/"/>
     <url>/2025/03/26/test/</url>
@@ -108,7 +146,7 @@
     
     <categories>
       
-      <category>杂记</category>
+      <category>随笔</category>
       
     </categories>
     
