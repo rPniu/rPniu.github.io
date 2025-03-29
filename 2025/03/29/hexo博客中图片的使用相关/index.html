@@ -19,27 +19,23 @@
   <meta name="author" content="rPniu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考链接先抬参考链接吧，博客只是自我理解，可能有错误 浅谈C&#x2F;C++堆栈指引——C&#x2F;C++堆栈很强大（绝美） - findumars - 博客园 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3755401.htmlhttps:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3756668.html 第一篇比较通俗，后两篇看到有">
+    <meta name="description" content="hexo博客中图片有几种方式存储，网络链接，本地图片 网络链接网络链接说实话其实是最好的，但是需要一个图床储存。 使用格式如下： 1![](https:&#x2F;&#x2F;...&#x2F;*.png)  就是不知道图片那天死了（无法访问）都不知道。加载也是问题，吃网络，不是很需要担心，没那么可怕。 本地文件全局资源文件夹在source目录下创建一个目录存储图片。 1source&#x2F;image  使用 1![](image&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言调用栈">
-<meta property="og:url" content="https://rpniu.github.io/2024/10/21/C%E8%AF%AD%E8%A8%80%E8%B0%83%E7%94%A8%E6%A0%88/index.html">
+<meta property="og:title" content="hexo博客中图片的使用相关">
+<meta property="og:url" content="https://rpniu.github.io/2025/03/29/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%9B%BE%E7%89%87%E7%9A%84%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="rPniu">
-<meta property="og:description" content="参考链接先抬参考链接吧，博客只是自我理解，可能有错误 浅谈C&#x2F;C++堆栈指引——C&#x2F;C++堆栈很强大（绝美） - findumars - 博客园 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3755401.htmlhttps:&#x2F;&#x2F;www.cnblogs.com&#x2F;clover-toeic&#x2F;p&#x2F;3756668.html 第一篇比较通俗，后两篇看到有">
+<meta property="og:description" content="hexo博客中图片有几种方式存储，网络链接，本地图片 网络链接网络链接说实话其实是最好的，但是需要一个图床储存。 使用格式如下： 1![](https:&#x2F;&#x2F;...&#x2F;*.png)  就是不知道图片那天死了（无法访问）都不知道。加载也是问题，吃网络，不是很需要担心，没那么可怕。 本地文件全局资源文件夹在source目录下创建一个目录存储图片。 1source&#x2F;image  使用 1![](image&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/rPniu/img@main/img/202406121909270.png">
-<meta property="og:image" content="https://images0.cnblogs.com/i/569008/201405/271644419475745.jpg">
-<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/Binhua-Liu/WindowsLiveWriter/0bb58b6786c8_8EAD/image_thumb_9.png">
-<meta property="article:published_time" content="2024-10-21T05:18:00.000Z">
-<meta property="article:modified_time" content="2025-03-24T10:52:32.015Z">
+<meta property="og:image" content="https://rpniu.github.io/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%9B%BE%E7%89%87%E7%9A%84%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/image-20250329220250324.png">
+<meta property="article:published_time" content="2025-03-29T13:46:39.000Z">
+<meta property="article:modified_time" content="2025-03-29T14:05:23.580Z">
 <meta property="article:author" content="rPniu">
-<meta property="article:tag" content="c">
-<meta property="article:tag" content="pwn">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/rPniu/img@main/img/202406121909270.png">
+<meta name="twitter:image" content="https://rpniu.github.io/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%9B%BE%E7%89%87%E7%9A%84%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/image-20250329220250324.png">
   
   
   
-  <title>C语言调用栈 - rPniu</title>
+  <title>hexo博客中图片的使用相关 - rPniu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -217,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C语言调用栈"></span>
+            <span id="subtitle" data-typed-text="hexo博客中图片的使用相关"></span>
           
         </div>
 
@@ -228,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-21 13:18" pubdate>
-          2024年10月21日 下午
+        <time datetime="2025-03-29 21:46" pubdate>
+          2025年3月29日 晚上
         </time>
       </span>
     
@@ -240,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          207 字
         
       </span>
     
@@ -251,7 +247,7 @@
         
         
         
-          10 分钟
+          2 分钟
         
       </span>
     
@@ -288,78 +284,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">C语言调用栈</h1>
+            <h1 id="seo-header">hexo博客中图片的使用相关</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>先抬参考链接吧，博客只是自我理解，可能有错误</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/findumars/p/7545818.html">浅谈C&#x2F;C++堆栈指引——C&#x2F;C++堆栈很强大（绝美） - findumars - 博客园</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/clover-toeic/p/3755401.html">https://www.cnblogs.com/clover-toeic/p/3755401.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/clover-toeic/p/3756668.html">https://www.cnblogs.com/clover-toeic/p/3756668.html</a></p>
-<p>第一篇比较通俗，后两篇看到有点困，但质量依旧很高</p>
-<p>也推荐直接在bilibili上搜索C语言函数调用栈</p>
-<h2 id="栈和寄存器"><a href="#栈和寄存器" class="headerlink" title="栈和寄存器"></a>栈和寄存器</h2><p>回归正题，以下内容基于x86架构，也就是俗称的32位</p>
-<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>栈是一种先进后出的机构，类似往一个箱子装东西，且东西的尺寸和箱子契合。想要取出下面的内容，需要先将最上的东西拿出，才可以拿出下面的内容。</p>
-<p>程序运行时会有虚拟地址空间，某一部分对应栈，保存函数的调用信息和局部变量。</p>
-<p>需要注意的是，程序的栈是从高地址向低地址增长的。也就是说栈的高地址是栈底，栈的低地址是栈顶。</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-section">栈底：高地址</span><br><span class="hljs-section">+----+</span><br><span class="hljs-section">|    |  &lt;- 初始状态，空栈</span><br><span class="hljs-section">+----+</span><br>栈顶：低地址<br></code></pre></td></tr></table></figure>
+                <p>hexo博客中图片有几种方式存储，网络链接，本地图片</p>
+<h3 id="网络链接"><a href="#网络链接" class="headerlink" title="网络链接"></a>网络链接</h3><p>网络链接说实话其实是最好的，但是需要一个图床储存。</p>
+<p>使用格式如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs less">!<span class="hljs-selector-attr">[]</span>(<span class="hljs-attribute">https</span>:<span class="hljs-comment">//.../*.png)</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>寄存器是计算机处理器（CPU）内部的一种非常快速的存储设备，它们位于 CPU 内核内部。分为通用寄存器，专用寄存器等。</p>
-<p>寄存器的图示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/rPniu/img@main/img/202406121909270.png" srcset="/image/loading.gif" lazyload alt="register"></p>
-<p>在函数的调用中主要讲ebp和esp寄存器，但并不代表只有这两个寄存器在发挥作用，比如，eax会保存函数的返回值</p>
-<h3 id="C语言函数调用栈"><a href="#C语言函数调用栈" class="headerlink" title="C语言函数调用栈"></a>C语言函数调用栈</h3><p>核心内容</p>
-<h4 id="栈帧结构"><a href="#栈帧结构" class="headerlink" title="栈帧结构"></a>栈帧结构</h4><p>函数的调用通常是嵌套的，同一时刻，堆栈中会有多个函数的信息，每个未完成的函数占用一个独立的连续区域，称作栈帧。</p>
-<p>栈帧是堆栈的逻辑片段，当调用函数时逻辑栈帧被压入堆栈, 当函数返回时逻辑栈帧被从堆栈中弹出。栈帧存放着函数参数，局部变量及恢复前一栈帧所需要的数据等。</p>
-<p>栈帧的边界由<strong>栈帧基地址指针EBP</strong>和<strong>堆栈指针ESP</strong>界定。</p>
-<p>以下是栈帧的示意图</p>
-<p>caller：主调函数</p>
-<p>callee：被调函数</p>
-<p><img src="https://images0.cnblogs.com/i/569008/201405/271644419475745.jpg" srcset="/image/loading.gif" lazyload></p>
-<h4 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h4><p>入栈顺序</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">被调用函数实参<span class="hljs-built_in">N</span>~<span class="hljs-number">1</span>→主调函数返回地址→主调函数帧基指针EBP→被调函数局部变量<span class="hljs-number">1</span>~<span class="hljs-built_in">N</span><br></code></pre></td></tr></table></figure>
+<p>就是不知道图片那天死了（无法访问）都不知道。加载也是问题，吃网络，不是很需要担心，没那么可怕。</p>
+<h3 id="本地文件"><a href="#本地文件" class="headerlink" title="本地文件"></a>本地文件</h3><h4 id="全局资源文件夹"><a href="#全局资源文件夹" class="headerlink" title="全局资源文件夹"></a>全局资源文件夹</h4><p>在source目录下创建一个目录存储图片。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span>/image<br></code></pre></td></tr></table></figure>
 
-<p>下面用一个C语言程序举例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">foo1</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span><br>&#123;<br>    <span class="hljs-type">int</span> p=m*n;<br>    <span class="hljs-keyword">return</span> p;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">foo</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span><br>&#123;<br>    <span class="hljs-type">int</span> c=a+<span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> d=b+<span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> e=foo1(c,d);<br>    <span class="hljs-keyword">return</span> e;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">int</span> result=foo(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">!<span class="hljs-selector-attr">[]</span>(<span class="hljs-selector-tag">image</span><span class="hljs-comment">/*.png)</span><br></code></pre></td></tr></table></figure>
 
-<p>main函数作为C语言的主函数，程序的入口</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs haskell">栈底：高地址<br>+----+ &lt;- <span class="hljs-type">EBP</span><br>|main|<br>+----+ &lt;- <span class="hljs-type">ESP</span><br></code></pre></td></tr></table></figure>
+<p>但是放在_post目录的文件看不到图片，只有上传后在网站上才可以看到。</p>
+<h4 id="文章资源文件夹"><a href="#文章资源文件夹" class="headerlink" title="文章资源文件夹"></a>文章资源文件夹</h4><p>修改<code>_config.yml</code>的配置项目</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
 
+<p>则会在 <code>hexo new name</code>同时创建</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-keyword">name</span>.md<br><span class="hljs-keyword">name</span> <span class="hljs-comment">//目录</span><br><br>使用<br>![](<span class="hljs-keyword">name</span><span class="hljs-comment">/*.png)</span><br></code></pre></td></tr></table></figure>
 
+<p>使用typora联动</p>
+<p><img src="/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%9B%BE%E7%89%87%E7%9A%84%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/image-20250329220250324.png" srcset="/image/loading.gif" lazyload alt="image-20250329220250324"></p>
+<p>安装下面的插件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">npm install hexo-asset-<span class="hljs-selector-tag">img</span> <span class="hljs-attr">--save</span><br></code></pre></td></tr></table></figure>
 
-<p>执行foo(3,4)，main作为主调函数，foo函数作为被调函数,将被调函数的参数入栈</p>
-<p>入栈顺序为<strong>参数n~1</strong>，参数入栈的顺序是函数的调用约定决定的</p>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs coq">高地址<br>+-----+ &lt;- EBP<br>|<span class="hljs-type">main</span> |<br><span class="hljs-type">|b</span> = <span class="hljs-number">4</span>|<br><span class="hljs-type">|a</span> = <span class="hljs-number">3</span>|<br><span class="hljs-type">+-----+  &lt;- ESP</span><br></code></pre></td></tr></table></figure>
-
-
-
-<p>主调函数的返回地址入栈，为了方便被调函数执行完毕后，回到主调函数继续执行程序</p>
-<p>如果当前＂call foo＂指令（代表调用函数foo）的地址是0x00171482，call指令占5个字节，那么下一个指令的地址为0x00171487，0x00171487将被压入堆栈</p>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs coq">高地址<br>+-----+ &lt;- EBP<br>|<span class="hljs-type">main</span> |<br><span class="hljs-type">|b</span> = <span class="hljs-number">4</span>|<br><span class="hljs-type">|a</span> = <span class="hljs-number">3</span>|<br><span class="hljs-type">|return</span> addresss|<br><span class="hljs-type">+-----+  &lt;- ESP</span><br></code></pre></td></tr></table></figure>
-
-
-
-<p>EBP入栈，然后将ESP的值赋值给EBP</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">高地址<br>+-----+ <br>|<span class="hljs-string">main </span>|<br>|<span class="hljs-string">b = 4</span>|<br>|<span class="hljs-string">a = 3</span>|<br>|<span class="hljs-string">return addresss</span>|<br>|<span class="hljs-string"> main函数的EBP </span>|<br>+-----+  <span class="hljs-variable">&lt;- ESP &lt;- EBP</span><br></code></pre></td></tr></table></figure>
-
-
-
-<p>ESP移动（值减小）为foo函数的局部变量分配空间。</p>
-<p>局部变量就是在函数内部声明的变量</p>
-<p>在debug模式（调试），编译器为局部变量分配的空间远远大于实际所需，或许是为了在堆栈中插入调试数据</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">高地址<br>+-----+ <br>|<span class="hljs-string">main </span>|<br>|<span class="hljs-string">b = 4</span>|<br>|<span class="hljs-string">a = 3</span>|<br>|<span class="hljs-string">return addresss</span>|<br>|<span class="hljs-string"> main函数的EBP </span>|<span class="hljs-string"> &lt;- EBP</span><br><span class="hljs-string"></span>|<span class="hljs-string">int c</span>|<br>|<span class="hljs-string">…………</span>|<br>+-----+ <span class="hljs-variable">&lt;- ESP </span><br></code></pre></td></tr></table></figure>
-
-
-
-<p>通用寄存器入栈</p>
-<p>函数中使用到的通用寄存器入栈，暂存起来，以便函数结束时恢复。在foo函数中用到的通用寄存器是EBX，ESI，EDI</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">高地址<br>+-----+ <br>|<span class="hljs-string">main </span>|<br>|<span class="hljs-string">b = 4</span>|<br>|<span class="hljs-string">a = 3</span>|<br>|<span class="hljs-string">return addresss</span>|<br>|<span class="hljs-string"> main函数的EBP </span>|<span class="hljs-string"> &lt;- EBP</span><br><span class="hljs-string"></span>|<span class="hljs-string">int c</span>|<br>|<span class="hljs-string">…………</span>|<br>|<span class="hljs-string">previous EBX</span>|<br>|<span class="hljs-string">previous ESI</span>|<br>|<span class="hljs-string">previous EDI</span>|<br>+-----+ <span class="hljs-variable">&lt;- ESP </span><br></code></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://images.cnblogs.com/cnblogs_com/Binhua-Liu/WindowsLiveWriter/0bb58b6786c8_8EAD/image_thumb_9.png" srcset="/image/loading.gif" lazyload></p>
-<p>可以看到随着数据的压栈（入栈）操作，（栈顶指针）RSP是在变化的，减小</p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>水一篇，感觉没什么过多的感悟和自我操作，懒鬼，不要学我，学习就是要多动手</p>
 
                 
               </div>
@@ -378,7 +331,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/binary/" class="category-chain-item">binary</a>
+  <a href="/categories/blog/" class="category-chain-item">blog</a>
   
   
 
@@ -390,15 +343,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/c/" class="print-no-link">#c</a>
-      
-        <a href="/tags/pwn/" class="print-no-link">#pwn</a>
-      
-    </div>
-  
 </div>
 
 
@@ -407,8 +351,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C语言调用栈</div>
-      <div>https://rpniu.github.io/2024/10/21/C语言调用栈/</div>
+      <div>hexo博客中图片的使用相关</div>
+      <div>https://rpniu.github.io/2025/03/29/hexo博客中图片的使用相关/</div>
     </div>
     <div class="license-meta">
       
@@ -420,7 +364,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月21日</div>
+          <div>2025年3月29日</div>
         </div>
       
       
@@ -452,18 +396,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/11/17/new-start/" title="new-start">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">new-start</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/16/vscode%E9%85%8D%E7%BD%AEc%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/" title="vscode配置c语言环境">
-                        <span class="hidden-mobile">vscode配置c语言环境</span>
+                      <a href="/2025/03/29/CC3/" title="CC3">
+                        <span class="hidden-mobile">CC3</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -486,7 +424,7 @@
         var options = Object.assign(
           {"clientID":"Ov23lirn09NkIEi34FA2","clientSecret":"01e7d495ef8743e2725eb1a6bf7478f9abae5edf","repo":"gitalk-comments","owner":"rPniu","admin":"rPniu","language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '03c3b72f54a513df0c98073a5869c9f7'
+            id: '66c7868c687383f61e836a98ea19a37b'
           }
         )
         var gitalk = new Gitalk(options);
