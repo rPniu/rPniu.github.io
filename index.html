@@ -312,7 +312,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/04/02/Java-CC7/" target="_self">
         <div>
-          CC7 与CC5类似，后半还是LazyMap.get()链子 直接看链子，get()确实很多调用的 java.util.AbstractMap     public boolean equals(Object o) {         if (o &#x3D;&#x3D; this)             return true; ​         if (!(o instanceof Map
+          CC7 与CC5类似，后半还是LazyMap.get()链子 直接看链子，get()确实很多调用的 java.util.AbstractMap123456789101112131415161718192021222324252627282930313233343536public boolean equals(Object o) &#123;    if (o == this)        re
         </div>
       </a>
 
@@ -320,7 +320,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-04-02 20:29" pubdate>
+            <time datetime="2025-04-02 22:14" pubdate>
               2025-04-02
             </time>
           </div>
@@ -373,7 +373,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/04/02/Java-CC5/" target="_self">
         <div>
-          CC5这里从 org.apache.commons.collections.map.LazyMap#get开始找，但是get方法的调用非常多，find usage就有2k+。代码审计老哥直接哭晕在厕所。 commons.collections4的 LazyMap去掉了函数 decorate。 直接看链子 后半还是CC1的LazyMap，前半则是 BadAttributeValueExpExcept
+          CC5 这里从 org.apache.commons.collections.map.LazyMap#get开始找，但是get方法的调用非常多，find usage就有2k+。代码审计老哥直接哭晕在厕所。 commons.collections4的 LazyMap去掉了函数 decorate。 直接看链子 后半还是CC1的LazyMap，前半则是 BadAttributeValueExpExcep
         </div>
       </a>
 
@@ -434,7 +434,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/04/01/Java-CC2/" target="_self">
         <div>
-          CC2前几天意识到一个问题，就是链子在序列化之前就触发了的事，这次将序列化和反序列分开，是不是好看一点。 CC2 链区别与其他链子一点的区别在于没有用 Transformer 数组。不用数组是因为比如 shiro 当中的漏洞，它会重写很多动态加载数组的方法，这就可能会导致我们的 EXP 无法通过数组实现。 CC2就是CC4翻版，在使用 InstantiateTransformer初始化 TrAXF
+          CC2 前几天意识到一个问题，就是链子在序列化之前就触发了的事，这次将序列化和反序列分开，是不是好看一点。 CC2 链区别与其他链子一点的区别在于没有用 Transformer 数组。不用数组是因为比如 shiro 当中的漏洞，它会重写很多动态加载数组的方法，这就可能会导致我们的 EXP 无法通过数组实现。 CC2就是CC4翻版，在使用 InstantiateTransformer初始化 TrAX
         </div>
       </a>
 
@@ -495,7 +495,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/04/01/Java_CC4/" target="_self">
         <div>
-          CC4CommonsCollections4 除 4.0 的其他版本去掉了 InvokerTransformer 的 Serializable 继承，导致无法序列化。 环境JDK8u65 maven添加依赖                            commons-collections             commons-collections             3.2.1
+          CC4 CommonsCollections4 除 4.0 的其他版本去掉了 InvokerTransformer 的 Serializable 继承，导致无法序列化。 环境JDK8u65 maven添加依赖 123456789101112131415161718&lt;dependencies&gt;    &lt;dependency&gt;        &lt;groupId&gt;com
         </div>
       </a>
 
