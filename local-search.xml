@@ -4,44 +4,6 @@
   
   
   <entry>
-    <title>测试二</title>
-    <link href="/2025/04/22/%E6%B5%8B%E8%AF%95%E4%BA%8C/"/>
-    <url>/2025/04/22/%E6%B5%8B%E8%AF%95%E4%BA%8C/</url>
-    
-    <content type="html"><![CDATA[<p><img src="/%E6%B5%8B%E8%AF%95%E4%BA%8C/sleep-17453309983741.jpg"></p><p><img src="/%E6%B5%8B%E8%AF%95%E4%BA%8C/sleep.jpg"></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>test</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>测试1</title>
-    <link href="/2025/04/22/%E6%B5%8B%E8%AF%951/"/>
-    <url>/2025/04/22/%E6%B5%8B%E8%AF%951/</url>
-    
-    <content type="html"><![CDATA[<p><img src="/2025/04/22/%E6%B5%8B%E8%AF%951/sleep.jpg"></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>test</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>NIDS</title>
     <link href="/2025/04/17/NIDS/"/>
     <url>/2025/04/17/NIDS/</url>
@@ -248,7 +210,7 @@
     <link href="/2025/03/29/hexo_img/"/>
     <url>/2025/03/29/hexo_img/</url>
     
-    <content type="html"><![CDATA[<p>hexo博客中图片有几种方式存储，网络链接，本地图片</p><h3 id="网络链接"><a href="#网络链接" class="headerlink" title="网络链接"></a>网络链接</h3><p>网络链接说实话其实是最好的，但是需要一个图床储存。</p><p>使用格式如下：</p><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs less">!<span class="hljs-selector-attr">[]</span>(<span class="hljs-attribute">https</span>:<span class="hljs-comment">//.../*.png)</span><br></code></pre></td></tr></table></figure><p>就是不知道图片那天死了（无法访问）都不知道。加载也是问题，吃网络，不是很需要担心，没那么可怕。</p><h3 id="本地文件"><a href="#本地文件" class="headerlink" title="本地文件"></a>本地文件</h3><h4 id="全局资源文件夹"><a href="#全局资源文件夹" class="headerlink" title="全局资源文件夹"></a>全局资源文件夹</h4><p>在source目录下创建一个目录存储图片。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span>/image<br></code></pre></td></tr></table></figure><p>使用</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">!<span class="hljs-selector-attr">[]</span>(<span class="hljs-selector-tag">image</span><span class="hljs-comment">/*.png)</span><br></code></pre></td></tr></table></figure><p>但是放在_post目录的文件看不到图片，只有上传后在网站上才可以看到。</p><h4 id="文章资源文件夹"><a href="#文章资源文件夹" class="headerlink" title="文章资源文件夹"></a>文章资源文件夹</h4><p>修改<code>_config.yml</code>的配置项目</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><p>则会在 <code>hexo new name</code>同时创建</p><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-keyword">name</span>.md<br><span class="hljs-keyword">name</span> <span class="hljs-comment">//目录</span><br><br>使用<br>![](<span class="hljs-keyword">name</span><span class="hljs-comment">/*.png)</span><br></code></pre></td></tr></table></figure><p>使用typora联动</p><p><img src="/2025/03/29/hexo_img/image-20250329220250324.png" alt="image-20250329220250324"></p><p>安装下面的插件</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">npm install hexo-asset-<span class="hljs-selector-tag">img</span> <span class="hljs-attr">--save</span><br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>hexo博客中图片有几种方式存储，网络链接，本地图片</p><h3 id="网络链接"><a href="#网络链接" class="headerlink" title="网络链接"></a>网络链接</h3><p>网络链接说实话其实是最好的，但是需要一个图床储存。</p><p>使用格式如下：</p><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs less">!<span class="hljs-selector-attr">[]</span>(<span class="hljs-attribute">https</span>:<span class="hljs-comment">//.../*.png)</span><br></code></pre></td></tr></table></figure><p>就是不知道图片那天死了（无法访问）都不知道。加载也是问题，吃网络，不是很需要担心，没那么可怕。</p><h3 id="本地文件"><a href="#本地文件" class="headerlink" title="本地文件"></a>本地文件</h3><h4 id="全局资源文件夹"><a href="#全局资源文件夹" class="headerlink" title="全局资源文件夹"></a>全局资源文件夹</h4><p>在source目录下创建一个目录存储图片。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span>/image<br></code></pre></td></tr></table></figure><p>使用</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">!<span class="hljs-selector-attr">[]</span>(<span class="hljs-selector-tag">image</span><span class="hljs-comment">/*.png)</span><br></code></pre></td></tr></table></figure><p>但是放在_post目录的文件看不到图片，只有上传后在网站上才可以看到。</p><h4 id="文章资源文件夹"><a href="#文章资源文件夹" class="headerlink" title="文章资源文件夹"></a>文章资源文件夹</h4><p>修改<code>_config.yml</code>的配置项目</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><p>则会在 <code>hexo new name</code>同时创建</p><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-keyword">name</span>.md<br><span class="hljs-keyword">name</span> <span class="hljs-comment">//目录</span><br><br>使用<br>![](<span class="hljs-keyword">name</span><span class="hljs-comment">/*.png)</span><br></code></pre></td></tr></table></figure><p>使用typora联动</p><p><img src="/2025/03/29/hexo_img/image-20250329220250324.png" alt="image-20250329220250324"></p><p>安装下面的插件</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">npm install hexo-asset-<span class="hljs-selector-tag">img</span> <span class="hljs-attr">--save</span><br></code></pre></td></tr></table></figure><h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p>使用文章资源文件夹时，一天发两篇中文命名的md文档，第二篇的图片就会解析到</p><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-symbol">https:</span>//rpniu.github.io/<span class="hljs-variable">%E6</span><span class="hljs-variable">%B5</span><span class="hljs-variable">%8</span>B<span class="hljs-variable">%E8</span><span class="hljs-variable">%AF</span><span class="hljs-variable">%95</span><span class="hljs-variable">%E4</span><span class="hljs-variable">%BA</span><span class="hljs-variable">%8</span>C/sleep.jpg<br></code></pre></td></tr></table></figure><p>正确解析的路径</p><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-symbol">https:</span>//rpniu.github.io/<span class="hljs-number">2025</span>/<span class="hljs-number">04</span>/<span class="hljs-number">22</span>/<span class="hljs-variable">%E6</span><span class="hljs-variable">%B5</span><span class="hljs-variable">%8</span>B<span class="hljs-variable">%E8</span><span class="hljs-variable">%AF</span><span class="hljs-variable">%951</span>/sleep.jpg<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
